@@ -1,14 +1,12 @@
-import logo from './aromaLogo.jpg';
 import './App.css';
+import Navbar from './componentes/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} alt="logo" />
-        <p>
-          Productos perfumados para tu hogar 
-        </p>
+          <Navbar />
       </header>
     </div>
   );
