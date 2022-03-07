@@ -1,6 +1,6 @@
 import { Card, Button } from 'react-bootstrap'
 
-const ItemContainer = (props) => {
+const Item = (props) => {
     let {nombreProducto, precio, agregar, imgURL} = props
     return (
         <Card style={{ width: '18rem', margin: '3rem' }}>
@@ -16,4 +16,4 @@ const ItemContainer = (props) => {
     )  
 }
 
-export default ItemContainer
+export default Item
