@@ -1,7 +1,11 @@
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
+import ItemCount from './ItemCount'
 
 const Item = (props) => {
-    let {nombreProducto, precio, agregar, imgURL} = props
+    let {nombreProducto, precio, imgURL} = props
+    const agregar = () => {
+        console.log("Producto agregado al carrito")
+    }
     return (
         <Card style={{ width: '18rem', margin: '3rem' }}>
         <Card.Img variant="top" src={imgURL} />
@@ -10,7 +14,7 @@ const Item = (props) => {
             <Card.Text> $
             {precio}
             </Card.Text>
-            <Button variant="primary" onClick={agregar}>Agregar al carrito</Button>
+            <ItemCount stock={10} inicial={1} agregar={agregar}/>
         </Card.Body>
         </Card>
     )  
