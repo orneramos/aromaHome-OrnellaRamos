@@ -3,9 +3,6 @@ import ItemCount from './ItemCount'
 
 const Item = (props) => {
     let {nombreProducto, precio, imgURL} = props
-    const agregar = () => {
-        console.log("Producto agregado al carrito")
-    }
     return (
         <Card style={{ width: '18rem', margin: '3rem' }}>
         <Card.Img variant="top" src={imgURL} />
@@ -14,7 +11,7 @@ const Item = (props) => {
             <Card.Text> $
             {precio}
             </Card.Text>
-            <ItemCount stock={10} inicial={1} agregar={agregar}/>
+            <ItemCount stock={5} inicial={1}/>
         </Card.Body>
         </Card>
     )  
