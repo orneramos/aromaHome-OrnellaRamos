@@ -1,3 +1,10 @@
+# Proyecto final del curso React de CODERHOUSE por Ornella Ramos
+
+El proyecto es un e-commerce basado en un emprendimiento de productos perfumados para el hogar como difusores, aromatizantes, jabones, entre otros.
+
+**Proyecto desarrollado utilizando React JS, construido con Create React App.**
+___
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
