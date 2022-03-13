@@ -1,12 +1,12 @@
 import Item from "./Item"
 
-const ItemList = () => {
+function ItemList({listaProductos}) {
     return (
-        <Item 
-        nombreProducto="Difusor Sweet Dreams" 
-        precio={600}
-        imgURL="../imagenes/difusor.jpg"
-        />
+        <div>
+            {listaProductos.map((producto, i )=> {
+                return <Item key={i} tipoProducto={producto.tipoProducto} fragancia={producto.fragancia} precio={producto.precio} imgURL={producto.imgURL}/>
+            })}
+        </div>
     )
 }
 
