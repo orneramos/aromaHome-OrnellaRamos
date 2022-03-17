@@ -3,7 +3,8 @@ import ItemList from "./ItemList";
 
 const ItemListContainer = () => {    
     const [listaProductos, setListaProductos] = useState([])
-    useEffect(() => {
+    const [loading, setLoading] = useState(false)
+
         const productos = [{
             tipoProducto: "Difusor",
             fragancia: "Sweet Dreams",
@@ -25,18 +26,26 @@ const ItemListContainer = () => {
                 }
             }, 2000);
         })
-        cargarProductos.then(result => {
-            console.log("LLego la info de los productos")
-            setListaProductos(result)
-        }).catch((err)=>{
-            console.log("No se pudieron cargar los productos " + err)
-        }).finally(()=>{
-            console.log("fin del proceso")
-        })
-    }, [])
-    
+
+        useEffect(()=> {
+            setLoading(true)
+            cargarProductos.then(result => {
+                setListaProductos(result)
+            }).catch((err)=>{
+                console.log("No se pudieron cargar los productos " + err)
+            }).finally(()=>{
+                setLoading(false)
+            })
+        }, [])
+   
     return (
-        <ItemList listaProductos={listaProductos}/>
+        <>
+            { 
+                loading 
+                ? <h2>Loading...</h2> 
+                : <ItemList listaProductos={listaProductos}/>
+            }
+        </>
     )
 }
 
