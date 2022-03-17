@@ -3,6 +3,8 @@ import ItemDetail from "./ItemDetail"
 
 const ItemDetailContainer = () => {
     const [productDetail, setProductDetail] = useState({})
+    const [loading, setLoading] = useState(false)
+
     const producto1 = {
         tipoProducto: "Difusor",
         fragancia: "Sweet Dreams",
@@ -11,21 +13,32 @@ const ItemDetailContainer = () => {
         linea: "Linea Terra. Fragancias con notas exóticas, calidad premium de larga duración",
         descripcion: "Floral, amberado, relajante. Notas de tilo, flores y lavanda"
     }
-    useEffect(()=>{   
-        const getItemDetail = new Promise((resolve, reject) => {
-            setTimeout(()=>{
-                resolve(producto1)
-            }, 2000)
-        })
+    const getItemDetail = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(producto1) 
+        }, 2000)
+    })
+
+    useEffect(() => {   
+        setLoading(true)
         getItemDetail.then(result => {
             setProductDetail(result)
-            console.log(result)
         }).catch(err => {
-            console.log("Error al cargar el producto")
+            console.log("Error:" + err)
+        }).finally(() => { 
+            setLoading(false)
         })
     }, [])
+
     return(
-        <ItemDetail productDetail={productDetail}/>
+        <>
+            { 
+                loading
+                ? <h2>Loading item...</h2>
+                : <ItemDetail productDetail={productDetail}/>
+            }
+        </>
+        
     )
 }
 
