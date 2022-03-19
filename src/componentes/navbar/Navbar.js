@@ -1,4 +1,5 @@
 import { Navbar as BootstrapNavBar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import CartWidget from '../CartWidget';
 import './Navbar.css';
 
@@ -7,13 +8,14 @@ const Navbar = () => {
         <div>
                 <BootstrapNavBar bg="light" expand="lg">
                     <Container>
-                    <BootstrapNavBar.Brand href="#home">Aroma</BootstrapNavBar.Brand>
+                    <Link to="/" className='navbar-brand'>Aroma</Link>
                     <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
                     <BootstrapNavBar.Collapse className="justify-content-end" id="basic-navbar-nav">
                     <Nav className="Navbar-brand">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#productos">Productos</Nav.Link>
-                        <Nav.Link href="#contacto">Contacto</Nav.Link>
+                        <Link to="/" className='nav-link'>Home</Link>
+                        <Link to="/productos/difusores"className='nav-link' >Difusores</Link>
+                        <Link to="/productos/aromatizantes" className='nav-link'>Aromatizantes</Link>
+                        <Link to="/productos/jabones" className='nav-link'>Jabones</Link>
                         <Nav.Link href="#home"><CartWidget /></Nav.Link>
                     </Nav>
                     </BootstrapNavBar.Collapse>
