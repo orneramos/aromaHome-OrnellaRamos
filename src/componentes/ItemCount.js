@@ -3,9 +3,6 @@ import { useState } from "react"
 
 const ItemCount = ({inicial, stock}) => {
     const [cantidad, setCantidad] = useState(inicial)
-    const agregar = () => {
-        console.log(`${cantidad} unidades del producto elegido fueron agregadas al carrito`)
-    }
     const sumar = () => {
         if(cantidad < stock) {
             setCantidad(cantidad + 1) 
@@ -24,7 +21,6 @@ const ItemCount = ({inicial, stock}) => {
                 <span>{cantidad}</span>
                 <Button variant="light" onClick={sumar}>+</Button>{' '}
             </div>
-            <Button variant="secondary" onClick={agregar}>Agregar al carrito</Button>{' '}
         </>
     )
 }

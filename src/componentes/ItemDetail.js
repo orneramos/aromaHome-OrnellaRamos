@@ -1,3 +1,6 @@
+import { Button } from 'react-bootstrap'
+import ItemCount from "./ItemCount"
+
 const ItemDetail = ({productDetail}) => {
     return(
         <div className="container">
@@ -8,6 +11,8 @@ const ItemDetail = ({productDetail}) => {
                     <p>{productDetail.linea}</p>
                     <p>{productDetail.descripcion}</p>
                     <p>$ {productDetail.precio}</p>
+                    <ItemCount stock={productDetail.stock} inicial={1}/>
+                    <Button variant="secondary">Agregar al carrito</Button>
                 </div>
             </div>
         </div>
