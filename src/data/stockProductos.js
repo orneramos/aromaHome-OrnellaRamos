@@ -17,7 +17,7 @@ export const stockProductos = [
         nombre: "Difusor",
         fragancia: "Coco & Vainilla",
         precio: 800,
-        stock: 0,
+        stock: 5,
         descripcion: "Floral, amberado, relajante. Notas de tilo, flores y lavanda",
         imgURL: "/imagenes/difusor-classic.jpg"
       },

@@ -12,7 +12,7 @@ const Item = (props) => {
                     <Card.Text> $
                     {precio}
                     </Card.Text>
-                    <Link className="btn btn-secondary" to={`/detail/${id}`}>Ver Producto</Link>{' '}
+                    <Link className="btn btn-secondary" to={`/item/${id}`}>Ver Producto</Link>{' '}
                 </Card.Body>
              </Card>
         </div>
