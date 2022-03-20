@@ -1,17 +1,17 @@
 import { Button } from 'react-bootstrap'
 import ItemCount from "./ItemCount"
 
-const ItemDetail = ({productDetail}) => {
+const ItemDetail = ({nombre, fragancia, precio, imgURL, linea, descripcion, stock}) => {
     return(
-        <div className="container">
-            <h1>{productDetail.tipoProducto} {productDetail.fragancia}</h1>
+        <div className="container m-5">
+            <h1>{nombre} {fragancia}</h1>
             <div className=" d-flex">
-                <img src={productDetail.imgURL} alt="imagen" width={400} className="img-fluid"></img>
+                <img src={imgURL} alt="imagen" width={400} className="img-fluid"></img>
                 <div className="container">
-                    <p>{productDetail.linea}</p>
-                    <p>{productDetail.descripcion}</p>
-                    <p>$ {productDetail.precio}</p>
-                    <ItemCount stock={productDetail.stock} inicial={1}/>
+                    <p>Linea {linea}</p>
+                    <p>{descripcion}</p>
+                    <p>$ {precio}</p>
+                    <ItemCount stock={stock} inicial={1}/>
                     <Button variant="secondary">Agregar al carrito</Button>
                 </div>
             </div>

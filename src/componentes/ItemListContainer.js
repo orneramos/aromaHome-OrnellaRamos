@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { cargarDatos } from "../helpers/cargarDatos"
-import ItemList from "./ItemList";
+import ItemList from "./ItemList"
 
 const ItemListContainer = () => {    
     const [listaProductos, setListaProductos] = useState([])
@@ -27,13 +27,13 @@ const ItemListContainer = () => {
         }, [categoria])
    
     return (
-        <div className="">
+        <>
             { 
                 loading 
                 ? <h2>Loading...</h2> 
                 : <ItemList listaProductos={listaProductos}/>
             }
-        </div>
+        </>
     )
 }
 
