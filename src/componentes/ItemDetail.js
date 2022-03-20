@@ -1,7 +1,22 @@
-import { Button } from 'react-bootstrap'
 import ItemCount from "./ItemCount"
+import { useState } from "react"
 
-const ItemDetail = ({nombre, fragancia, precio, imgURL, linea, descripcion, stock}) => {
+const ItemDetail = ({id, nombre, fragancia, precio, imgURL, linea, descripcion, stock}) => {
+
+    const [cantidad, setCantidad] = useState(1)
+
+    function handleAgregar () {
+        const itemToCart = {
+            id,
+            nombre,
+            fragancia,
+            imgURL,
+            precio,
+            cantidad
+        }
+        console.log(`Se han agregado ${cantidad} unidades del producto ${nombre} ${fragancia}`)
+    }
+
     return(
         <div className="container m-5">
             <h1>{nombre} {fragancia}</h1>
@@ -11,8 +26,12 @@ const ItemDetail = ({nombre, fragancia, precio, imgURL, linea, descripcion, stoc
                     <p>Linea {linea}</p>
                     <p>{descripcion}</p>
                     <p>$ {precio}</p>
-                    <ItemCount stock={stock} inicial={1}/>
-                    <Button variant="secondary">Agregar al carrito</Button>
+                    <ItemCount 
+                        stock={stock} 
+                        cantidad={cantidad} 
+                        setCantidad={setCantidad} 
+                        handleAgregar={handleAgregar}
+                    />
                 </div>
             </div>
         </div>

@@ -1,14 +1,13 @@
 import { Button } from "react-bootstrap"
-import { useState } from "react"
 
-const ItemCount = ({inicial, stock}) => {
-    const [cantidad, setCantidad] = useState(inicial)
-    const sumar = () => {
+const ItemCount = ({stock, handleAgregar, cantidad, setCantidad}) => {
+
+    const handleSumar = () => {
         if(cantidad < stock) {
             setCantidad(cantidad + 1) 
         } 
     }
-    const restar = () => {
+    const handleRestar = () => {
         if(cantidad > 1) {
             setCantidad(cantidad - 1)
         }
@@ -17,9 +16,10 @@ const ItemCount = ({inicial, stock}) => {
     return (
         <>
             <div>
-                <Button variant="light" onClick={restar}>-</Button>{' '}
+                <Button variant="light" onClick={handleRestar}>-</Button>{' '}
                 <span>{cantidad}</span>
-                <Button variant="light" onClick={sumar}>+</Button>{' '}
+                <Button variant="light" onClick={handleSumar}>+</Button>{' '}
+                <Button variant="secondary" className="d-block mt-2" onClick={handleAgregar}>Agregar al carrito</Button>
             </div>
         </>
     )
