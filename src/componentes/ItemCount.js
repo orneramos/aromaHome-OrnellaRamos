@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap"
 
-const ItemCount = ({stock, handleAgregar, cantidad, setCantidad}) => {
+const ItemCount = ({inicial, stock, onAdd, cantidad, setCantidad}) => {
 
     const handleSumar = () => {
         if(cantidad < stock) {
@@ -12,14 +12,17 @@ const ItemCount = ({stock, handleAgregar, cantidad, setCantidad}) => {
             setCantidad(cantidad - 1)
         }
     }
+    const reset = () => {
+        setCantidad(inicial)
+    }
 
     return (
         <>
             <div>
                 <Button variant="light" onClick={handleRestar}>-</Button>{' '}
-                <span>{cantidad}</span>
+                <span className="m-3">{cantidad}</span>
                 <Button variant="light" onClick={handleSumar}>+</Button>{' '}
-                <Button variant="secondary" className="d-block mt-2" onClick={handleAgregar}>Agregar al carrito</Button>
+                <Button variant="secondary" className="d-block mt-2" onClick={()=>{onAdd(cantidad); reset()}}>Agregar al carrito</Button>
             </div>
         </>
     )

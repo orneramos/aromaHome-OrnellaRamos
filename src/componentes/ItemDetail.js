@@ -1,36 +1,33 @@
 import ItemCount from "./ItemCount"
-import { useState } from "react"
+import {useContext, useState } from "react"
+import { CartContext } from "../context/CartContext"
 
-const ItemDetail = ({id, nombre, fragancia, precio, imgURL, linea, descripcion, stock}) => {
-
+const ItemDetail = ({item}) => {
     const [cantidad, setCantidad] = useState(1)
+    const [stock, setStock] = useState(item.stock)
 
-    function handleAgregar () {
-        const itemToCart = {
-            id,
-            nombre,
-            fragancia,
-            imgURL,
-            precio,
-            cantidad
-        }
-        console.log(`Se han agregado ${cantidad} unidades del producto ${nombre} ${fragancia}`)
+    const carritoContext = useContext(CartContext)
+
+    const onAdd = (quantityToAdd) => {
+        setStock([stock - quantityToAdd])
+        carritoContext.addItem(item, quantityToAdd)
     }
 
     return(
         <div className="container m-5">
-            <h1>{nombre} {fragancia}</h1>
+            <h1>{item.nombre} {item.fragancia}</h1>
             <div className=" d-flex">
-                <img src={imgURL} alt="imagen" width={400} className="img-fluid"></img>
+                <img src={item.imgURL} alt="imagen" width={400} className="img-fluid"></img>
                 <div className="container">
-                    <p>Linea {linea}</p>
-                    <p>{descripcion}</p>
-                    <p>$ {precio}</p>
+                    <p>Linea {item.linea}</p>
+                    <p>{item.descripcion}</p>
+                    <p>$ {item.precio}</p>
                     <ItemCount 
+                        inicial={1}
                         stock={stock} 
                         cantidad={cantidad} 
                         setCantidad={setCantidad} 
-                        handleAgregar={handleAgregar}
+                        onAdd={onAdd}
                     />
                 </div>
             </div>

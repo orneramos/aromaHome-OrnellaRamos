@@ -6,21 +6,21 @@ import './Navbar.css';
 const Navbar = () => {
     return(
         <div>
-                <BootstrapNavBar bg="light" expand="lg">
-                    <Container>
-                    <Link to="/" className='navbar-brand'>Aroma</Link>
-                    <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
-                    <BootstrapNavBar.Collapse className="justify-content-end" id="basic-navbar-nav">
-                    <Nav className="Navbar-brand">
-                        <Link to="/" className='nav-link'>Home</Link>
-                        <Link to="/productos/difusores"className='nav-link' >Difusores</Link>
-                        <Link to="/productos/aromatizantes" className='nav-link'>Aromatizantes</Link>
-                        <Link to="/productos/jabones" className='nav-link'>Jabones</Link>
-                        <Nav.Link href="#home"><CartWidget /></Nav.Link>
-                    </Nav>
-                    </BootstrapNavBar.Collapse>
-                    </Container>
-                </BootstrapNavBar>
+            <BootstrapNavBar bg="light" expand="lg">
+                <Container>
+                <Link to="/" className='navbar-brand'>Aroma</Link>
+                <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
+                <BootstrapNavBar.Collapse className="justify-content-end" id="basic-navbar-nav">
+                <Nav className="Navbar-brand">
+                    <Link to="/" className='nav-link'>Home</Link>
+                    <Link to="/productos/difusores"className='nav-link' >Difusores</Link>
+                    <Link to="/productos/aromatizantes" className='nav-link'>Aromatizantes</Link>
+                    <Link to="/productos/jabones" className='nav-link'>Jabones</Link>
+                    <Link to="/cart"><CartWidget /></Link>
+                </Nav>
+                </BootstrapNavBar.Collapse>
+                </Container>
+            </BootstrapNavBar>
         </div>
     )
 }
