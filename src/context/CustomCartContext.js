@@ -14,7 +14,8 @@ export const CustomCartContext = ({children}) => {
         } else {
             const productInCart = productosEnCarrito.find(producto => producto.item.id === item.id)
             productInCart.quantity = productInCart.quantity + quantity
-        }       
+        }
+        item.stock = item.stock - quantity  
     }
 
     const removeItem = (itemId) => {
