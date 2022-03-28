@@ -2,11 +2,13 @@ import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
 import {CartItem} from "./CartItem"
 import {Button} from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 const Cart = () => {
     const carritoContext = useContext(CartContext)
 
-    return(
+    return (
+        carritoContext.productosEnCarrito.length > 0 ?
         <div className="container mt-5">
             <h2>Tu carrito</h2>
             <ul className="list-group">
@@ -24,6 +26,12 @@ const Cart = () => {
                 <Button variant="success">Finalizar compra</Button>
             </div>
         </div>
+        : 
+        <div className="m-5 text-center">
+            <h2>Su carrito esta vacio</h2>
+            <Link to="/" className="btn btn-success">Ver productos</Link>
+        </div>
+        
     )
 }
 

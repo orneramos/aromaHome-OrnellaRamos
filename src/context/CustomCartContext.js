@@ -3,6 +3,7 @@ import {CartContext} from './CartContext'
 
 export const CustomCartContext = ({children}) => {
     const [productosEnCarrito, setProductosEnCarrito] = useState([])
+    const [totalItems, setTotalItems] = useState(0)
     
     const addItem = (item, quantity) => {
         if(!isInCart(item.id)) {
@@ -16,6 +17,7 @@ export const CustomCartContext = ({children}) => {
             productInCart.quantity = productInCart.quantity + quantity
         }
         item.stock = item.stock - quantity  
+        setTotalItems(totalItems + quantity)
     }
 
     const removeItem = (itemId) => {
@@ -31,9 +33,9 @@ export const CustomCartContext = ({children}) => {
         const valorIsInCart = productosEnCarrito.some(producto => producto.item.id === itemId)
         return valorIsInCart
     }
-
+    
     return(
-        <CartContext.Provider value={{productosEnCarrito, addItem, removeItem, clear, isInCart}}>
+        <CartContext.Provider value={{productosEnCarrito, addItem, removeItem, clear, isInCart, totalItems}}>
             {children}
         </CartContext.Provider>
     )

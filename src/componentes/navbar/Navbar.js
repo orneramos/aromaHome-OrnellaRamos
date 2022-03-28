@@ -16,7 +16,7 @@ const Navbar = () => {
                     <Link to="/productos/difusores"className='nav-link' >Difusores</Link>
                     <Link to="/productos/aromatizantes" className='nav-link'>Aromatizantes</Link>
                     <Link to="/productos/jabones" className='nav-link'>Jabones</Link>
-                    <Link to="/cart"><CartWidget /></Link>
+                    <Link to="/cart" className='nav-link text-success text-big'><CartWidget /></Link>
                 </Nav>
                 </BootstrapNavBar.Collapse>
                 </Container>

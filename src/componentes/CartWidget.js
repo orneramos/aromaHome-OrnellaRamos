@@ -1,9 +1,14 @@
+import { Button } from 'bootstrap';
+import { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
+import { CartContext } from '../context/CartContext';
 
-const CartWidget = () => {
+const CartWidget = (totalItems) => {
+    const carritoContext = useContext(CartContext)
     return(
         <div>
-            <FaShoppingCart />
+           <FaShoppingCart />
+            <span className='m-1'>{carritoContext.totalItems}</span>
         </div>
     )
 }
