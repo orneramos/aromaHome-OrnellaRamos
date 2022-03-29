@@ -11,7 +11,7 @@ export const CartItem = ({itemProps}) => {
                 <h3>Item {itemProps.item.nombre} {itemProps.item.fragancia}</h3>
                 <p>{itemProps.quantity} unidades</p>
                 <p>$ {itemProps.quantity * itemProps.item.precio}</p>
-                <Button variant="outline-danger" onClick={()=>carritoContext.removeItem(itemProps.item.id)}> <BsTrash /> </Button>
+                <Button variant="outline-danger" onClick={()=>carritoContext.removeItem(itemProps.item.id, itemProps.quantity)}> <BsTrash /> </Button>
             </li>
         </div>
     )   

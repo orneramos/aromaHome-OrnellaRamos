@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {CartContext} from './CartContext'
 
 export const CustomCartContext = ({children}) => {
@@ -16,17 +16,19 @@ export const CustomCartContext = ({children}) => {
             const productInCart = productosEnCarrito.find(producto => producto.item.id === item.id)
             productInCart.quantity = productInCart.quantity + quantity
         }
-        item.stock = item.stock - quantity  
         setTotalItems(totalItems + quantity)
     }
 
-    const removeItem = (itemId) => {
+
+    const removeItem = (itemId, quantity) => {
         const nuevoArray = productosEnCarrito.filter(producto => producto.item.id !== itemId)
         setProductosEnCarrito(nuevoArray)
+        setTotalItems(totalItems - quantity)
     }
 
     const clear = () => {
         setProductosEnCarrito([])
+        setTotalItems(0)
     }
 
     const isInCart = (itemId) => {
