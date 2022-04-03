@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { cargarDatos } from "../helpers/cargarDatos"
+import {collection, getDocs} from 'firebase/firestore'
+import {db} from '../utils/firebase'
 import ItemList from "./ItemList"
 
 const ItemListContainer = () => {    
     const [listaProductos, setListaProductos] = useState([])
     const [loading, setLoading] = useState(false)
+
     const {categoria} = useParams()
 
     useEffect(()=> {
-        setLoading(true)
-        cargarDatos()
-        .then(result => {
+        const getData = async() => {
+            setLoading(true)
+            const query = collection(db, 'items')
+            const response = await getDocs(query)
+            const stockProductos = response.docs.map(doc => {return{id: doc.id, ...doc.data()}})
             if(!categoria) {
-                setListaProductos(result)
+                setListaProductos(stockProductos)
             } else {
-                setListaProductos(result.filter((productos) => productos.categoria === categoria))
+                setListaProductos(stockProductos.filter((productos) => productos.categoria === categoria))
             }
-        })
-        .catch((err)=>{
-            console.log("No se pudieron cargar los productos " + err)
-        })
-        .finally(()=>{
             setLoading(false)
-        })
+        }
+        getData()
     }, [categoria])
    
     return (

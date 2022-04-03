@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { cargarDatos }  from "../helpers/cargarDatos"
+import {db} from '../utils/firebase'
+import {getDoc, doc} from 'firebase/firestore'
 import ItemDetail from "./ItemDetail"
 
 const ItemDetailContainer = () => {
@@ -11,17 +12,16 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {   
         setLoading(true)
-        cargarDatos()
-        .then(result => {
-            setItemDetail(result.find((producto) => producto.id === Number(itemId)))
-        })
-        .catch(err => {
-            console.log("Error:" + err)
-        })
-        .finally(() => { 
+        const cargarItem = async() => {
+            const query = doc(db, "items", itemId)
+            const response = await getDoc(query)
+            const responseData = response.data()
+            const newDoc = {id: response.id, ...responseData}
+            setItemDetail(newDoc)
             setLoading(false)
-        })
-    }, [])
+        }
+        cargarItem()
+    }, [itemId])
 
     return(
         <>

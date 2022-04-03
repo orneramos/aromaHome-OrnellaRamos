@@ -6,7 +6,7 @@ const Item = (props) => {
     return (
         <div>
             <Card style={{ width: '18rem', margin: '3rem' }}>
-                <Card.Img variant="top" src={imgURL} />
+                <Card.Img variant="top" src={imgURL} alt="imagen producto"/>
                 <Card.Body>
                     <Card.Title>{nombre} {fragancia}</Card.Title>
                     <Card.Text> $
