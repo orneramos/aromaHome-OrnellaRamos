@@ -35,9 +35,17 @@ export const CustomCartContext = ({children}) => {
         const valorIsInCart = productosEnCarrito.some(producto => producto.item.id === itemId)
         return valorIsInCart
     }
+
+    const calcularPrecioTotal = () => {
+            let total = 0
+            productosEnCarrito.map(producto => 
+               total += producto.quantity * producto.item.precio
+            )
+            return total
+    }
     
     return(
-        <CartContext.Provider value={{productosEnCarrito, addItem, removeItem, clear, isInCart, totalItems}}>
+        <CartContext.Provider value={{productosEnCarrito, addItem, removeItem, clear, isInCart, totalItems, calcularPrecioTotal}}>
             {children}
         </CartContext.Provider>
     )
