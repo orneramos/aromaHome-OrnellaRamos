@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../context/CartContext';
 
-const CartWidget = (totalItems) => {
+const CartWidget = () => {
 
     const carritoContext = useContext(CartContext)
 
@@ -10,7 +10,7 @@ const CartWidget = (totalItems) => {
         carritoContext.productosEnCarrito.length > 0 &&
         <div>
            <FaShoppingCart />
-            <span className='m-1'>{carritoContext.totalItems}</span>
+            <span className='m-1'>{carritoContext.calcularTotalItems()}</span>
         </div>
     )
 }

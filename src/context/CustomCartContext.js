@@ -3,7 +3,6 @@ import {CartContext} from './CartContext'
 
 export const CustomCartContext = ({children}) => {
     const [productosEnCarrito, setProductosEnCarrito] = useState([])
-    const [totalItems, setTotalItems] = useState(0)
     
     const addItem = (item, quantity) => {
         if(!isInCart(item.id)) {
@@ -15,20 +14,17 @@ export const CustomCartContext = ({children}) => {
         } else {
             const productInCart = productosEnCarrito.find(producto => producto.item.id === item.id)
             productInCart.quantity = productInCart.quantity + quantity
+            setProductosEnCarrito([...productosEnCarrito])
         }
-        setTotalItems(totalItems + quantity)
     }
 
-
-    const removeItem = (itemId, quantity) => {
+    const removeItem = (itemId) => {
         const nuevoArray = productosEnCarrito.filter(producto => producto.item.id !== itemId)
         setProductosEnCarrito(nuevoArray)
-        setTotalItems(totalItems - quantity)
     }
 
     const clear = () => {
         setProductosEnCarrito([])
-        setTotalItems(0)
     }
 
     const isInCart = (itemId) => {
@@ -43,9 +39,17 @@ export const CustomCartContext = ({children}) => {
             )
             return total
     }
+
+    const calcularTotalItems= () => {
+        let total = 0
+        productosEnCarrito.map(producto => 
+           total += producto.quantity
+        )
+        return total
+    }
     
     return(
-        <CartContext.Provider value={{productosEnCarrito, addItem, removeItem, clear, isInCart, totalItems, calcularPrecioTotal}}>
+        <CartContext.Provider value={{productosEnCarrito, addItem, removeItem, clear, isInCart, calcularTotalItems, calcularPrecioTotal}}>
             {children}
         </CartContext.Provider>
     )

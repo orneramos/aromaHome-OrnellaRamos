@@ -8,10 +8,9 @@ export const CartItem = ({itemProps}) => {
     return(
         <div>
             <li className="list-group-item d-flex justify-content-between">
-                <h3>Item {itemProps.item.nombre} {itemProps.item.fragancia}</h3>
-                <p>{itemProps.quantity} unidades</p>
-                <p>$ {itemProps.quantity * itemProps.item.precio}</p>
-                <Button variant="outline-danger" onClick={()=>carritoContext.removeItem(itemProps.item.id, itemProps.quantity)}> <BsTrash /> </Button>
+                <p className='col-lg-7'>Item {itemProps.item.nombre} {itemProps.item.fragancia}</p>
+                <p className='col-lg-3'>{itemProps.quantity} x $ {itemProps.item.precio}</p>
+                <Button variant="outline-danger" className="col-lg-2" onClick={()=>carritoContext.removeItem(itemProps.item.id, itemProps.quantity)}> <BsTrash /> </Button>
             </li>
         </div>
     )   
