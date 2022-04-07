@@ -4,14 +4,22 @@ import { CartContext } from "../context/CartContext"
 
 const ItemDetail = ({item}) => {
     const [cantidad, setCantidad] = useState(1)
-    const [stock, setStock] = useState(item.stock)
 
     const carritoContext = useContext(CartContext)
 
     const onAdd = (quantityToAdd) => {
-        setStock([stock - quantityToAdd])
         carritoContext.addItem(item, quantityToAdd)
     }
+
+    var cantidadEnCarrito = 0
+    if (carritoContext.productosEnCarrito.length > 0) {
+        const itemEnCarrito = carritoContext.productosEnCarrito.find(producto => producto.item.id === item.id)
+        if (itemEnCarrito) {
+            cantidadEnCarrito = itemEnCarrito.quantity
+        }
+    }
+
+    const stockRestante = item.stock - cantidadEnCarrito;
 
     return(
         <div className="container m-5">
@@ -24,10 +32,10 @@ const ItemDetail = ({item}) => {
                     <p>$ {item.precio}</p>
                     <ItemCount 
                         inicial={1}
-                        stock={stock} 
                         cantidad={cantidad} 
-                        setCantidad={setCantidad} 
-                        onAdd={onAdd}
+                        setCantidad={setCantidad}
+                        onAdd={onAdd}  
+                        stockRestante={stockRestante}
                     />
                 </div>
             </div>
