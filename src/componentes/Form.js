@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { collection, Timestamp, addDoc } from "firebase/firestore"
+import { collection, Timestamp, addDoc, documentId, query, where, getDocs, writeBatch} from "firebase/firestore"
 import { CartContext } from "../context/CartContext"
 import { db } from '../utils/firebase' 
 import { useNavigate } from 'react-router-dom';
@@ -26,19 +26,41 @@ const Form = () => {
             date: Timestamp.fromDate(new Date())
         }
 
-        //agregar validacion de stock
-        
-
-        //crear referencia de la colleccion donde guardo los datos de las ordenes de compra
+        //crear referencias de la colleccion de ordenes de compra y de los items
         const ordersCollection = collection(db, 'orders')
-        //crear nuevo documento de la orden
-        const docReference = await addDoc(ordersCollection, newOrder)
-        //referencia del documento
-        const orderId = docReference.id
-        carritoContext.clear()
-        navigate(`/success/${orderId}`)
+        const itemsCollection = collection(db, 'items')
 
-        //agregar actualizacion de stock de cada producto en firestore
+        const batch = writeBatch(db)
+        let outOfStock = false
+
+        //obtener info de firestore
+        const q = query(itemsCollection, where(documentId(), "in", carritoContext.productosEnCarrito.map((prod) => prod.item.id)));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.docs.forEach((doc) => {
+            const itemEnCarrito = carritoContext.productosEnCarrito.find((product) => product.item.id === doc.id)
+
+            if (doc.data().stock >= itemEnCarrito.quantity) {
+                batch.update(doc.ref, {
+                    stock: doc.data().stock - itemEnCarrito.quantity
+                })
+            } else {
+                outOfStock = true
+            }
+        })
+
+        if (!outOfStock) {
+            //si hay stock de los productos creo la orden de compra y act
+            addDoc(ordersCollection, newOrder)
+                .then((response) => {
+                    batch.commit()
+                    const orderId = response.id
+                    carritoContext.clear()
+                    navigate(`/success/${orderId}`)
+                })
+        } else {
+            alert("Hay items sin stock")
+        } 
     }
 
     return(
