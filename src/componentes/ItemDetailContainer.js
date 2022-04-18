@@ -10,8 +10,10 @@ const ItemDetailContainer = () => {
 
     const {itemId} = useParams()
 
-    useEffect(() => {   
+    useEffect(() => {  
+         
         setLoading(true)
+
         const cargarItem = async() => {
             const query = doc(db, "items", itemId)
             const response = await getDoc(query)
@@ -20,7 +22,9 @@ const ItemDetailContainer = () => {
             setItemDetail(newDoc)
             setLoading(false)
         }
+
         cargarItem()
+
     }, [itemId])
 
     return(

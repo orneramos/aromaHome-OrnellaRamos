@@ -22,10 +22,12 @@ const CartDetail = () => {
                     <p>Total: $ {carritoContext.calcularPrecioTotal()}
                     </p>
                 </div>
+            {/* buttons */}
             <div className="justify-content-between d-flex mt-2">
                 <Link className="btn btn-outline-secondary" to="/">Seguir comprando</Link>{' '}
                 <Button variant="outline-danger" onClick={carritoContext.clear}>Vaciar carrito</Button>
             </div>
+
         </div>
     )
 }

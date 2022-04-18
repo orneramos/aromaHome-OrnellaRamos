@@ -5,8 +5,10 @@ import { db } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
+    
     const carritoContext = useContext(CartContext)
     let navigate = useNavigate();
+
     //Crear y guardar orden de compra
     const sendOrder = async(e) => {
         e.preventDefault()
@@ -50,7 +52,7 @@ const Form = () => {
         })
 
         if (!outOfStock) {
-            //si hay stock de los productos creo la orden de compra y act
+            //si hay stock de los productos creo la orden de compra y luego vacio el carrito
             addDoc(ordersCollection, newOrder)
                 .then((response) => {
                     batch.commit()
@@ -69,14 +71,14 @@ const Form = () => {
             <div className="row g-3">
                 <div className="col-sm-6">
                     <label htmlFor="firstName" className="form-label">Nombre</label>
-                    <input type="text" className="form-control" id="firstName" placeholder="" required/>
+                    <input type="text" className="form-control" id="firstName" placeholder="Nombre" required/>
                     <div className="invalid-feedback" id="errorFirstName">
                     Complete su nombre
                     </div>
                 </div>
                 <div className="col-sm-6">
                     <label htmlFor="lastName" className="form-label">Apellido</label>
-                    <input type="text" className="form-control" id="lastName" placeholder="" required/>
+                    <input type="text" className="form-control" id="lastName" placeholder="Apellido" required/>
                     <div className="invalid-feedback" id="errorLastName">
                     Complete su apellido
                     </div>

@@ -4,13 +4,15 @@ import {collection, getDocs} from 'firebase/firestore'
 import {db} from '../utils/firebase'
 import ItemList from "./ItemList"
 
-const ItemListContainer = () => {    
+const ItemListContainer = () => {  
+
     const [listaProductos, setListaProductos] = useState([])
     const [loading, setLoading] = useState(false)
 
     const {categoria} = useParams()
 
     useEffect(()=> {
+
         const getData = async() => {
             setLoading(true)
             const query = collection(db, 'items')
@@ -24,6 +26,7 @@ const ItemListContainer = () => {
             setLoading(false)
         }
         getData()
+        
     }, [categoria])
    
     return (
